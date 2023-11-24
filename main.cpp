@@ -4,6 +4,6 @@
 
 using namespace std ; 
 int main(){
-    SCpp_6_func() ; 
+    SCpp_12_func() ; 
     return 0 ; 
 }
