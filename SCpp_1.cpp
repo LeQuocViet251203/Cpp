@@ -1,7 +1,13 @@
 #include <iostream> 
 #include <iomanip>
 #include <string>
+#include <cstring> 
 #include <typeinfo>
+#include <cstdlib>
+#include <ctime> 
+#include <random> 
+#include <array> 
+#include <algorithm> 
 #include "SCpp_1.h"
 #include "Constants.h"
 using namespace std ; 
@@ -9,11 +15,175 @@ using namespace constants ;
 #if 0
 #endif 
 // #define YEAR_OF_BIRTH 2016 
+#define _CRT_SECURE_NO_WARNINGS 
+#define MAX 100 
+#define ROW 10 
+#define COLUMN 20 
+
 int g_x{30} ;
 const int g_y(20) ; 
 extern int g_n ; 
+// auto add(int a , int b) -> int ; 
+void PrintArr(const array <int , 5> &arr){
+    for(const auto &item : arr){
+        cout << item << " " ; 
+    }
+    cout << endl ; 
+}
+void SCpp_18_func(){
+    array <int , 5> arr{2,3,4,5,6} ; 
+    cout << arr[0] << endl ; // khong check do dai cua mang
+    cout << arr.at(0) << endl ;
+    // cout << arr.at(6) << endl ; // no se throw ra 1 cai exception thay vi giet chet chuong trinh
+    cout << arr.size() << endl ; 
+    // khi truyen vao ham thi no khong phai truyen dia chi cua arr ma no chuyen ca arr vao nen foreach dung duoc
+    // va luon su dung tham chieu hoac tham chieu hang de tang hieu suat 
+    PrintArr(arr) ; 
+    sort(arr.begin() , arr.end()) ; 
+    PrintArr(arr) ; 
+    sort(arr.rbegin(), arr.rend()) ;
+    PrintArr(arr) ;  
+}
+void SCpp_17_func(){
+    /*
+    binh thuong neu dung item thi no chi sao chep gia tri vao item thoi 
+    thi bay gio su dung tham chieu de truy cap gia tri cua chinh no trong arr
+    neu khong muon thay doi gia tri cua item thi tham chieu hang 
+    vong lap for each khong lam viec voi con tro den 1 mang
+    */
+    int arr[]{11,22,33,44,55} ; 
+    for(const auto &item : arr){
+        cout << item << " " ; 
+    }
+    cout << endl ;
+}
+auto add(int a , int b){
+    return a + b ; 
+}
+void SCpp_16_func(){
+    /*
+    auto kha giong var trong c# , dung de tu dong nhan dang kieu du lieu 
+    thong qua gia tri nen phai khoi tao gia tri luon . 
+    khong lam parameter duoc 
+    */
+   auto NKteam1(38) ; auto NKteam3('K') ; auto Var(0.5f) ; 
+   int NKteam2(30) ; 
+   cout << "type of tung cai 1: " << typeid(NKteam1).name() << endl ;
+   cout << "type of tung cai 1: " << typeid(Var).name() << endl ; 
+   cout << "type of tung cai 1: " << typeid(NKteam3).name() << endl ; 
+   cout << add(NKteam1 , NKteam2) << endl ;  
+}
+void SCpp_15_func(){
+    /*
+    Chuoi ky tu string thuoc namespace std duoc cai dat trong 1 lop
+    cua thu vien chuan STL
+    chuoi ky tu c-style tu C ket thuc bang \0 null neu nhap vao 5 thi co 6 ptu trong mang
+    neu thua thi la null het 
+    chi doc den null nen neu sau null la mat het 
+    */
+   char sz[10] = {'V' , 'I' , 'E' , 'T'} , sz2[10] = "Viet" ;
+    cout << sz2 << endl ; 
+    cout << "Enter your name " ; 
+    cin.getline(sz , 10) ; //phan tu 10 la null r nen chi nhap duoc 9 phan tu thoi 
+    // cout << strlwr(sz)  << " " << strlen(sz) << endl ; 
+    // cout << strupr(sz) << endl ; 
+    // strcpy(sz2 , 10 ,  sz) ; //chuoi nhan duoc phai nho hon
+    // cout << sz2 << endl ;
+    // strcat(sz2 , sz) ; //noi chuoi
+    // strcmp(sz2 , sz) ; //so sanh do dai 2 chuoi
+    cout << strcmp(sz2,sz) << endl ;
+    cout << sz << " " << sz2 << endl ; 
+    if(strstr(sz, sz2) != NULL)
+    cout << "tim thay" << endl ;  //kiem tra chuoi con tra ve con tro va neu k thi no tra ve null
+    else 
+    cout << "khong tim thay" << endl ; 
+}
+void SCpp_14_func(){
+/*
+dong cot va dia chi se tang theo dong 0x10 0x14 xong xuong se la khac
+int Matrix[][COLUMN]
+them ham vao func int a[][100] hoac int (*a)[100] no se dua dia chi cua phan tu dau tien
+*/
+int matrix[][COLUMN]{
+    {6},
+    {1,2},
+    {3,4,5}
+} ; 
+for (int i = 0; i < 3; i++)
+{
+    for (int j = 0; j < 3; j++)
+    {
+        cout << matrix[i][j] << " " ; 
+    }
+    cout << endl ;
+} 
+}
+static void Working_with_array(int arr_2[] , int &nSize){
+    srand(time(NULL)) ; 
+    cout << "Nhap vao so luong phan tu: " ; 
+    cin >> nSize ; 
+   for (int i = 0; i < nSize ; i++)
+   {
+     arr_2[i] = rand() ;
+   }
+}
+void SCpp_13_func(){
+    /*
+    dia chi mang la dia chi cua arr[0]
+    int arr[1000] ,  int *arr_3 , truyen mang vao function thi 
+    no chi truyen dia chi vao thoi
+    */
+   int arr[MAX] , nSize ; 
+   cout << MAX * sizeof(arr) << endl ; 
+   int arr_2[4]{1,2,3,4} ; int arr_3[]{4,6,9} ; 
+   Working_with_array(arr , nSize) ;
+   for (int i = 0; i < nSize ; i++)
+   {
+    cout << arr[i] << endl ; 
+   }
+   cout << nSize << endl ; 
+}
 void SCpp_12_func(){
+/*
+Cau truc dieu khien 
+Muon khoi tao bien trong 1 case thi phai them 1 dau ngoac nhon va bien cua ban se duoc
+su dung trong toan bo case duoi 
+*/
+// exit(0) ; //dung luon va 0 la gia tri tra ve cua ham main
+// if (/* condition */)
+// {
+//     /* code */
+// }
+// try
+// {
+//     /* code */
+// }
+// catch(const std::exception& e)
+// {
+//     std::cerr << e.what() << '\n';
+//     throw ; 
+// }
+// int n ; 
+// TryAgain: //label phai nam trong ham 
+// cout << "Nhap vao so n :" ; 
+// cin  >> n ; 
+// if(n < 0)
+// goto TryAgain ; 
+// goto Hello ; 
 
+// Hello:
+// cout << n << " la so nguyen duong" << endl ;
+ srand(time(NULL)) ; 
+ int a = rand() % 100 + 1  ; // co the tu 1 den 32767 
+ for (int i = 0; i < 10; i++)
+ {
+    cout << rand() % 10 + 1 << endl ;
+ }
+ random_device rd ; 
+ mt19937_64 rng(rd()) ; //bo so random 64 bit
+ uniform_int_distribution<int> uni(1,1000) ; 
+auto n = uni(rng) ; 
+cout << n << endl ; 
 }
 static void SayHi() ; 
 void SCpp_11_func(){

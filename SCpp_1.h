@@ -1,6 +1,12 @@
 #ifndef SCPP_1_H
 #define SCPP_1_H 
 
+void SCpp_18_func() ;
+void SCpp_17_func() ; 
+void SCpp_16_func() ; 
+void SCpp_15_func() ;
+void SCpp_14_func() ;
+void SCpp_13_func() ; 
 void SCpp_12_func() ;
 void SCpp_11_func() ; 
 static void SayHi() ;
